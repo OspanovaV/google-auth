@@ -4,8 +4,11 @@ const router = express.Router();
 
 const ctrl = require('../../controllers/auth');
 
-const { validateBody, authenticate } = require('../../middlewares');
+const { validateBody, authenticate, passport } = require('../../middlewares');
 const { schemas } = require('../../models/user');
+
+// запрос на авторизацию через google
+router.get('/google', passport.authenticate('google'))
 
 // запрос на регистрацию(signup)
 router.post('/register', validateBody(schemas.registerSchema), ctrl.register)
